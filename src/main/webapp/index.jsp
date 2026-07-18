@@ -1,5 +1,13 @@
 <html>
+
 <body>
-<h2><%= "Hello World!" %></h2>
+    <%
+        String name = "Imansha";
+        int year = 2026;
+    %>
+
+    <h1>Welcome, <%= name %></h1>
+    <p>Current year: <%= year %></p>
 </body>
+
 </html>
