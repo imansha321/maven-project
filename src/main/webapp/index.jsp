@@ -8,6 +8,7 @@
 
     <h1>Welcome, <%= name %></h1>
     <p>Current year: <%= year %></p>
+    <p>  lorem ipsum  </p>
 </body>
 
 </html>
