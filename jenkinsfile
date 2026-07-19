@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                withMaven(maven: 'Maven 3.8.7') {
+                    sh 'mvn clean package'
+                }
+            }
+        }
+        stage('Test') {
+            steps {
+                withMaven(maven: 'Maven 3.8.7') {
+                    sh 'mvn test'
+                }
+            }
+        }
+        stage('Code Analysis') {
+            steps {
+                withMaven(maven: 'Maven 3.8.7') {
+                    sh 'mvn sonar:sonar'
+                }
+            }
+        }
+        stage('Deploy') {
+            steps {
+                withMaven(maven: 'Maven 3.8.7') {
+                    sh 'mvn deploy'
+                }
+            }
+        }
+    }
+}
