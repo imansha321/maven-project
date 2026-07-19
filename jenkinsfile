@@ -26,8 +26,8 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                withMaven(maven: 'Maven 3.8.7') {
-                    sh 'mvn tomcat7:deploy'
+                configFileProvider([configFile(fileId: '3dc4e145-c049-4115-a395-fcd626114de3', variable: 'MAVEN_SETTINGS')]) {
+                    sh "mvn -s $MAVEN_SETTINGS tomcat7:deploy"
                 }
             }
         }
