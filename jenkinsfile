@@ -16,9 +16,18 @@ pipeline {
             }
         }
         stage('SonarQube Analysis') {
-            def mvn = tool 'Default Maven';
-            withSonarQubeEnv() {
-            sh "${mvn}/bin/mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=maven-project -Dsonar.projectName='maven-project'"
+            steps {
+                script {
+                    def mvn = tool 'Default Maven'
+                    withSonarQubeEnv('SonarQube') {
+                        sh """
+                            ${mvn}/bin/mvn clean verify \
+                            org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+                            -Dsonar.projectKey=maven-project \
+                            -Dsonar.projectName=maven-project
+                        """
+                    }
+                }
             }
         }
         stage('Deploy') {
